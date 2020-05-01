@@ -92,8 +92,8 @@ ggsave(filename = "cum_excess_mortality_state_median.png", path = "graphs/", typ
 ## Average Ratio of Excess Deaths by Federal State, Median
 states_days %>%
   filter(year == 2020) %>%
-  mutate(ratio.excess_deaths = case_when(n.deaths < p25.n.deaths ~ (n.deaths + (n.deaths - p25.n.deaths)) / n.deaths,
-                                         n.deaths > p75.n.deaths ~ (n.deaths + (n.deaths - p75.n.deaths)) / n.deaths,
+  mutate(ratio.excess_deaths = case_when(n.deaths < p25.n.deaths ~ (n.deaths + (n.deaths - p25.n.deaths)) / median.n.deaths,
+                                         n.deaths > p75.n.deaths ~ (n.deaths + (n.deaths - p75.n.deaths)) / median.n.deaths,
                                          n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 1)) %>%
   group_by(federal_state) %>%
   summarise(ratio.excess_deaths = mean(ratio.excess_deaths)) %>%
@@ -112,7 +112,7 @@ states_days %>%
 ggsave(filename = "avg_ratio_excess_mortality_state_median.pdf", path = "graphs/", device = cairo_pdf, 
        width = 29.7, height = 21, units = "cm")
 
-ggsave(filename = "avg_ratio_xcess_mortality_state_median.png", path = "graphs/", type = "cairo-png", 
+ggsave(filename = "avg_ratio_excess_mortality_state_median.png", path = "graphs/", type = "cairo-png", 
        width = 29.7, height = 21, units = "cm", dpi = 300)
 
 # By Age Group ------------------------------------------------------------
@@ -204,8 +204,8 @@ ggsave(filename = "cum_excess_mortality_age_median.png", path = "graphs/", type 
 ## Average Ratio of Excess Deaths by age Group, Median
 germany_ages %>%
   filter(year == 2020) %>%
-  mutate(ratio.excess_deaths = case_when(n.deaths < p25.n.deaths ~ (n.deaths + (n.deaths - p25.n.deaths)) / n.deaths,
-                                         n.deaths > p75.n.deaths ~ (n.deaths + (n.deaths - p75.n.deaths)) / n.deaths,
+  mutate(ratio.excess_deaths = case_when(n.deaths < p25.n.deaths ~ (n.deaths + (n.deaths - p25.n.deaths)) / median.n.deaths,
+                                         n.deaths > p75.n.deaths ~ (n.deaths + (n.deaths - p75.n.deaths)) / median.n.deaths,
                                          n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 1)) %>%
   group_by(age_category) %>%
   summarise(ratio.excess_deaths = mean(ratio.excess_deaths)) %>%
@@ -224,5 +224,5 @@ germany_ages %>%
 ggsave(filename = "avg_ratio_excess_mortality_age_median.pdf", path = "graphs/", device = cairo_pdf, 
        width = 29.7, height = 21, units = "cm")
 
-ggsave(filename = "avg_ratio_xcess_mortality_age_median.png", path = "graphs/", type = "cairo-png", 
+ggsave(filename = "avg_ratio_excess_mortality_age_median.png", path = "graphs/", type = "cairo-png", 
        width = 29.7, height = 21, units = "cm", dpi = 300)
