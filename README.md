@@ -1,5 +1,8 @@
 # tidy-mortality
+
 Clean and [tidy mortality data](data/tidy/) (.csv and .rds) for 2016 to 2020 from the Federal Statistical Office of Germany. The original dataset in .xlsx format is available at [this link](https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/Sterbefaelle-Lebenserwartung/Tabellen/sonderauswertung-sterbefaelle.html?nn=209016). Note that data for 2019 and 2020 are preliminary and have not yet undergone plausibility checks.
+
+I plan to update this repository whenever new data are released. Meanwhile, please feel free to clone or fork the repository. Comments are very welcome!
 
 *Disclaimer*: I do not take responsibility for any errors either in the original dataset or in my cleaned-up version. Use with caution.
 
@@ -11,22 +14,22 @@ The tidied data allow for different decompositions: by *federal state* and by *a
 
 ### Excess Mortality
 
-![Excess Mortality by Federal State Relative to Median of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_state_median.png)
-Download as [pdf](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_state_median.pdf) or [png](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_state_median.png).
+![Excess Mortality by Federal State Relative to Median of 2016 to 2019](graphs/excess_mortality_state_median.png)
+Download as [pdf](graphs/excess_mortality_state_median.pdf) or [png](graphs/excess_mortality_state_median.png).
 
 ### Cumulative Excess Deaths
 
 The following plot displays the cumulative number of deaths from January 1 until April 5, 2020 that can reasonably be considered "out of the ordinary", i.e. that fall outside the interquartile range. Note that we may have both positive and negative excess mortality. The calculation proceeds as follows: daily differences between the 25^th percentile and the number of deaths if the number of deaths is below the 25^th percentile, resp. daily differences between the 75^th percentile and the number of deaths if the number of deaths is above the 75^th percentile are summed up over the relevant date range. If the number of deaths falls within the interquartile range, excess deaths are recorded as zero.
 
-![Cumulative Excess Deaths by Federal State Relative to Median of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/cum_excess_mortality_state_median.png)
-Download as [pdf](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/cum_excess_mortality_state_median.pdf) or [png](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/cum_excess_mortality_state_median.png).
+![Cumulative Excess Deaths by Federal State Relative to Median of 2016 to 2019](graphs/cum_excess_mortality_state_median.png)
+Download as [pdf](graphs/cum_excess_mortality_state_median.pdf) or [png](graphs/cum_excess_mortality_state_median.png).
 
-### Average Ratio of Excess Deaths to Median Deaths of Previous Years
+### Ratio of Excess Deaths to Median Deaths of Previous Years
 
-The idea of this graph is similar to the above. Instead of reporting absolute numbers, I calculate the ratio of excess deaths (calculated the same way as above) to the number of deaths per day and average over the relevant time period. For deaths falling within the interquartile range the ratio is recorded as one.
+The idea of this graph is similar to the above. Instead of reporting absolute numbers, I calculate the ratio of the number of deaths to the median number of deaths in previous years per day and average over the relevant time period.
 
-![Average Ratio of Excess Deaths by Federal State Relative to Median of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/avg_ratio_excess_mortality_state_median.png)
-Download as [pdf](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/avg_ratio_excess_mortality_state_median.pdf) or [png](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/avg_ratio_excess_mortality_state_median.png).
+![Ratio of Deaths by Federal State Relative to Median of 2016 to 2019](graphs/ratio_excess_mortality_state_median.png)
+Download as [pdf](graphs/ratio_excess_mortality_state_median.pdf) or [png](graphs/ratio_excess_mortality_state_median.png).
 
 ## By Age Group
 
@@ -39,12 +42,12 @@ Download as [pdf](https://github.com/florentinkraemer/tidy-mortality/blob/master
 
 The following plot displays the cumulative number of deaths from January 1 until April 5, 2020 that can reasonably be considered "out of the ordinary", i.e. that fall outside the interquartile range. Note that we may have both positive and negative excess mortality. The calculation proceeds as follows: daily differences between the 25^th percentile and the number of deaths if the number of deaths is below the 25^th percentile, resp. daily differences between the 75^th percentile and the number of deaths if the number of deaths is above the 75^th percentile are summed up over the relevant date range. If the number of deaths falls within the interquartile range, excess deaths are recorded as zero.
 
-![Cumulative Excess Deaths by Age Group Relative to Median of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/cum_excess_mortality_age_median.png)
-Download as [pdf](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/cum_excess_mortality_age_median.pdf) or [png](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/cum_excess_mortality_age_median.png).
+![Cumulative Excess Deaths by Age Group Relative to Median of 2016 to 2019](graphs/cum_excess_mortality_age_median.png)
+Download as [pdf](graphs/cum_excess_mortality_age_median.pdf) or [png](graphs/cum_excess_mortality_age_median.png).
 
-### Average Ratio of Excess Deaths to Median Deaths of Previous Years
+### Ratio of Excess Deaths to Median Deaths of Previous Years
 
-The idea of this graph is similar to the above. Instead of reporting absolute numbers, I calculate the ratio of excess deaths (calculated the same way as above) to the number of deaths per day and average over the relevant time period. For deaths falling within the interquartile range the ratio is recorded as one.
+The idea of this graph is similar to the above. Instead of reporting absolute numbers, I calculate the ratio of the number of deaths to the median number of deaths in previous years per day and average over the relevant time period.
 
-![Average Ratio of Excess Deaths by Age Group Relative to Median of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/avg_ratio_excess_mortality_age_median.png)
-Download as [pdf](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/avg_ratio_excess_mortality_age_median.pdf) or [png](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/avg_ratio_excess_mortality_age_median.png).
+![Ratio of Deaths by Age Group Relative to Median of 2016 to 2019](graphs/ratio_excess_mortality_age_median.png)
+Download as [pdf](graphs/ratio_excess_mortality_age_median.pdf) or [png](graphs/ratio_excess_mortality_age_median.png).

@@ -1,5 +1,6 @@
 library(tidyverse)
 library(hrbrthemes)
+library(ggalt)
 
 # By State ----------------------------------------------------------------
 
@@ -92,27 +93,26 @@ ggsave(filename = "cum_excess_mortality_state_median.png", path = "graphs/", typ
 ## Average Ratio of Excess Deaths by Federal State, Median
 states_days %>%
   filter(year == 2020) %>%
-  mutate(ratio.excess_deaths = case_when(n.deaths < p25.n.deaths ~ (n.deaths + (n.deaths - p25.n.deaths)) / median.n.deaths,
-                                         n.deaths > p75.n.deaths ~ (n.deaths + (n.deaths - p75.n.deaths)) / median.n.deaths,
-                                         n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 1)) %>%
+  mutate(ratio.deaths = n.deaths / median.n.deaths) %>%
   group_by(federal_state) %>%
-  summarise(ratio.excess_deaths = mean(ratio.excess_deaths)) %>%
-  ggplot(aes(x = fct_reorder(as_factor(federal_state), ratio.excess_deaths),
-             y = ratio.excess_deaths)) +
-  geom_point() +
+  summarise(ratio.deaths = mean(ratio.deaths)) %>%
+  ggplot(aes(x = fct_reorder(as_factor(federal_state), ratio.deaths),
+             y = ratio.deaths)) +
+  # geom_point(color = "steelblue", size = 3) +
+  geom_lollipop(point.size = 3, point.colour = "steelblue", color = "grey70") +
   geom_hline(yintercept = 1, color = "steelblue") +
   coord_flip() +
   theme_ft_rc() +
-  labs(title = "Average Ratio of Excess Deaths to Median Deaths by Federal State",
+  labs(title = "Ratio of 2020 Deaths to Median Value of Deaths by Federal State",
        subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to April 5, 2020.",
        x = NULL,
-       y = "Ratio of Excess Deaths to Median Deaths",
+       y = "Ratio of Deaths to Median Value of Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
 
-ggsave(filename = "avg_ratio_excess_mortality_state_median.pdf", path = "graphs/", device = cairo_pdf, 
+ggsave(filename = "ratio_excess_mortality_state_median.pdf", path = "graphs/", device = cairo_pdf, 
        width = 29.7, height = 21, units = "cm")
 
-ggsave(filename = "avg_ratio_excess_mortality_state_median.png", path = "graphs/", type = "cairo-png", 
+ggsave(filename = "ratio_excess_mortality_state_median.png", path = "graphs/", type = "cairo-png", 
        width = 29.7, height = 21, units = "cm", dpi = 300)
 
 # By Age Group ------------------------------------------------------------
@@ -201,28 +201,27 @@ ggsave(filename = "cum_excess_mortality_age_median.pdf", path = "graphs/", devic
 ggsave(filename = "cum_excess_mortality_age_median.png", path = "graphs/", type = "cairo-png", 
        width = 29.7, height = 21, units = "cm", dpi = 300)
 
-## Average Ratio of Excess Deaths by age Group, Median
+## Average Ratio of Excess Deaths by Age Group, Median
 germany_ages %>%
   filter(year == 2020) %>%
-  mutate(ratio.excess_deaths = case_when(n.deaths < p25.n.deaths ~ (n.deaths + (n.deaths - p25.n.deaths)) / median.n.deaths,
-                                         n.deaths > p75.n.deaths ~ (n.deaths + (n.deaths - p75.n.deaths)) / median.n.deaths,
-                                         n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 1)) %>%
+  mutate(ratio.deaths = n.deaths / median.n.deaths) %>%
   group_by(age_category) %>%
-  summarise(ratio.excess_deaths = mean(ratio.excess_deaths)) %>%
-  ggplot(aes(x = fct_reorder(as_factor(age_category), ratio.excess_deaths),
-             y = ratio.excess_deaths)) +
-  geom_point() +
+  summarise(ratio.deaths = mean(ratio.deaths)) %>%
+  ggplot(aes(x = age_category,
+             y = ratio.deaths)) +
+  # geom_point(color = "steelblue", size = 3) +
+  geom_lollipop(point.size = 3, point.colour = "steelblue", color = "grey70") +
   geom_hline(yintercept = 1, color = "steelblue") +
   coord_flip() +
   theme_ft_rc() +
-  labs(title = "Average Ratio of Excess Deaths to Median Deaths by Age Category",
+  labs(title = "Ratio of 2020 Deaths to Median Value of Deaths by Age Group",
        subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to April 5, 2020.",
        x = NULL,
-       y = "Ratio of Excess Deaths to Median Deaths",
+       y = "Ratio of Deaths to Median Value of Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
 
-ggsave(filename = "avg_ratio_excess_mortality_age_median.pdf", path = "graphs/", device = cairo_pdf, 
+ggsave(filename = "ratio_excess_mortality_age_median.pdf", path = "graphs/", device = cairo_pdf, 
        width = 29.7, height = 21, units = "cm")
 
-ggsave(filename = "avg_ratio_excess_mortality_age_median.png", path = "graphs/", type = "cairo-png", 
+ggsave(filename = "ratio_excess_mortality_age_median.png", path = "graphs/", type = "cairo-png", 
        width = 29.7, height = 21, units = "cm", dpi = 300)
