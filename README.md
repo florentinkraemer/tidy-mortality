@@ -11,5 +11,5 @@ The tidied data allow for different decompositions: by *federal state* and by *a
 
 ## By Age Group
 
-![Excess Mortality by Age Group Relative to Mean of 2016 to 2019](https://github/florentinkraemer/tidy-mortality/graphs/excess_mortality_age_mean.png)
+![Excess Mortality by Age Group Relative to Mean of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_age_mean.png)
 
