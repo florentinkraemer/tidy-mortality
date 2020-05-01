@@ -123,7 +123,9 @@ states_days_summary <- states_days_allyears %>%
   mutate(upper_bound.n.deaths = mean.n.deaths + sd.n.deaths / 2,
          lower_bound.n.deaths = mean.n.deaths - sd.n.deaths / 2,
          upper_bound.mean.excess_mortality = upper_bound.n.deaths / mean.n.deaths,
-         lower_bound.mean.excess_mortality = lower_bound.n.deaths / mean.n.deaths)
+         lower_bound.mean.excess_mortality = lower_bound.n.deaths / mean.n.deaths,
+         upper_bound.median.excess_mortality = p75.n.deaths / median.n.deaths,
+         lower_bound.median.excess_mortality = p25.n.deaths / median.n.deaths)
 
 states_days <- states_days_allyears %>%
   left_join(states_days_summary) %>%

@@ -7,9 +7,15 @@ Clean and tidy mortality data for 2016 to 2020 from the Federal Statistical Offi
 
 The tidied data allow for different decompositions: by *federal state* and by *age group*. The raw dataset also contains mortality data for combinations of broader age groups (0-64 and 65+) and all federal states. In what follows, I first calculate the median number of deaths by federal state/age group for all years prior to 2020 (2016 to 2019). To provide a measure of how spread out these numbers are over the years, I also calculate the interquartile range, i.e. the range between the 25th and 75th percentile. Data for 2020 are then plotted as a smooth function using loess smoothing.
 
-## By Federal State
+## Excess Mortality By Federal State
 
-## By Age Group
+![Excess Mortality by Federal State Relative to Median of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_state_median.png)
+*Download* [pdf](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_state_median.pdf) or [png](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_state_median.png).
 
-![Excess Mortality by Age Group Relative to Mean of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_age_mean.png)
+## Excess Mortality By Age Group
+
+![Excess Mortality by Age Group Relative to Median of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_age_median.png)
+*Download* [pdf](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_age_median.pdf) or [png](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_age_median.png).
+
+
 
