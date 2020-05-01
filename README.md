@@ -19,7 +19,7 @@ Download as [pdf](graphs/excess_mortality_state_median.pdf) or [png](graphs/exce
 
 ### Cumulative Excess Deaths
 
-The following plot displays the cumulative number of deaths from January 1 until April 5, 2020 that can reasonably be considered "out of the ordinary", i.e. that fall outside the interquartile range. Note that we may have both positive and negative excess mortality. The calculation proceeds as follows: daily differences between the 25^th percentile and the number of deaths if the number of deaths is below the 25^th percentile, resp. daily differences between the 75^th percentile and the number of deaths if the number of deaths is above the 75^th percentile are summed up over the relevant date range. If the number of deaths falls within the interquartile range, excess deaths are recorded as zero.
+The following plot displays the cumulative number of deaths from January 1 until April 5, 2020 that can reasonably be considered "out of the ordinary", i.e. that fall outside the interquartile range. Note that we may have both positive and negative excess mortality. The calculation proceeds as follows: daily differences between the 25<sup>th</sup> percentile and the number of deaths if the number of deaths is below the 25<sup>th</sup> percentile, resp. daily differences between the 75<sup>th</sup> percentile and the number of deaths if the number of deaths is above the 75<sup>th</sup> percentile are summed up over the relevant date range. If the number of deaths falls within the interquartile range, excess deaths are recorded as zero.
 
 ![Cumulative Excess Deaths by Federal State Relative to Median of 2016 to 2019](graphs/cum_excess_mortality_state_median.png)
 Download as [pdf](graphs/cum_excess_mortality_state_median.pdf) or [png](graphs/cum_excess_mortality_state_median.png).
@@ -35,12 +35,12 @@ Download as [pdf](graphs/ratio_excess_mortality_state_median.pdf) or [png](graph
 
 ### Excess Mortality
 
-![Excess Mortality by Age Group Relative to Median of 2016 to 2019](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_age_median.png)
-Download as [pdf](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_age_median.pdf) or [png](https://github.com/florentinkraemer/tidy-mortality/blob/master/graphs/excess_mortality_age_median.png).
+![Excess Mortality by Age Group Relative to Median of 2016 to 2019](graphs/excess_mortality_age_median.png)
+Download as [pdf](graphs/excess_mortality_age_median.pdf) or [png](graphs/excess_mortality_age_median.png).
 
 ### Cumulative Excess Deaths
 
-The following plot displays the cumulative number of deaths from January 1 until April 5, 2020 that can reasonably be considered "out of the ordinary", i.e. that fall outside the interquartile range. Note that we may have both positive and negative excess mortality. The calculation proceeds as follows: daily differences between the 25^th percentile and the number of deaths if the number of deaths is below the 25^th percentile, resp. daily differences between the 75^th percentile and the number of deaths if the number of deaths is above the 75^th percentile are summed up over the relevant date range. If the number of deaths falls within the interquartile range, excess deaths are recorded as zero.
+The following plot displays the cumulative number of deaths from January 1 until April 5, 2020 that can reasonably be considered "out of the ordinary", i.e. that fall outside the interquartile range. Note that we may have both positive and negative excess mortality. The calculation proceeds as follows: daily differences between the 25<sup>th</sup> percentile and the number of deaths if the number of deaths is below the 25<sup>th</sup> percentile, resp. daily differences between the 75<sup>th</sup> percentile and the number of deaths if the number of deaths is above the 75<sup>th</sup> percentile are summed up over the relevant date range. If the number of deaths falls within the interquartile range, excess deaths are recorded as zero.
 
 ![Cumulative Excess Deaths by Age Group Relative to Median of 2016 to 2019](graphs/cum_excess_mortality_age_median.png)
 Download as [pdf](graphs/cum_excess_mortality_age_median.pdf) or [png](graphs/cum_excess_mortality_age_median.png).
