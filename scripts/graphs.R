@@ -113,6 +113,48 @@ ggsave(filename = "ratio_excess_mortality_state_median.pdf", path = "graphs/", d
 ggsave(filename = "ratio_excess_mortality_state_median.png", path = "graphs/", type = "cairo-png", 
        width = 29.7, height = 21, units = "cm", dpi = 300)
 
+## Excess Deaths over Time
+
+cum_excess_deaths.byState <- states_days %>%
+  filter(year == 2020) %>%
+  mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
+                                   n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
+                                   n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 0)) %>%
+  group_by(federal_state) %>%
+  summarise(cum_excess_deaths = sum(excess_deaths)) %>%
+  mutate(flag_positive = forcats::as_factor(if_else(cum_excess_deaths > 0, "Positive", "Negative")))
+
+states_days %>%
+  filter(year == 2020) %>%
+  left_join(cum_excess_deaths.byState) %>%
+  mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
+                                   n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
+                                   n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 0)) %>%
+  ggplot(aes(x = date,
+             y = excess_deaths,
+             color = flag_positive)) +
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date("2020-03-23")),
+             linetype = 4,
+             color = "grey70") + # corresponds to March 23, 2020 - on this day, social contact limitations became effective
+  facet_wrap(~ federal_state) +
+  theme_ft_rc() +
+  scale_color_manual(values = c("Positive" = "#852828", "Negative" = "#719861")) +
+  scale_y_continuous(breaks = c(-100, 0, 100)) +
+  guides(color = FALSE) +
+  labs(title = "Excess Deaths by Federal State over Time",
+       subtitle = "Vertical line corresponds to March 23, 2020, the day on which strict social distancing measures were implemented. \nColors encode cumulative excess deaths: green if negative, red if positive.",
+       x = NULL,
+       y = "Number of Excess Deaths",
+       color = NULL,
+       caption = "Data: Destatis, Analysis: Florentin Krämer")
+
+ggsave(filename = "excess_deaths_time_state.pdf", path = "graphs/", device = cairo_pdf, 
+       width = 29.7, height = 21, units = "cm")
+
+ggsave(filename = "excess_deaths_time_state.png", path = "graphs/", type = "cairo-png", 
+       width = 29.7, height = 21, units = "cm", dpi = 300)
+
 # By Age Group ------------------------------------------------------------
 
 ## Excess Mortality from All Causes by Age Group, Mean
@@ -222,4 +264,45 @@ ggsave(filename = "ratio_excess_mortality_age_median.pdf", path = "graphs/", dev
        width = 29.7, height = 21, units = "cm")
 
 ggsave(filename = "ratio_excess_mortality_age_median.png", path = "graphs/", type = "cairo-png", 
+       width = 29.7, height = 21, units = "cm", dpi = 300)
+
+## Excess Deaths over Time
+
+cum_excess_deaths.byAge <- germany_ages %>%
+  filter(year == 2020) %>%
+  mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
+                                   n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
+                                   n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 0)) %>%
+  group_by(age_category) %>%
+  summarise(cum_excess_deaths = sum(excess_deaths)) %>%
+  mutate(flag_positive = forcats::as_factor(if_else(cum_excess_deaths > 0, "Positive", "Negative")))
+
+germany_ages %>%
+  filter(year == 2020) %>%
+  left_join(cum_excess_deaths.byAge) %>%
+  mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
+                                   n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
+                                   n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 0)) %>%
+  ggplot(aes(x = date,
+             y = excess_deaths,
+             color = flag_positive)) +
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date("2020-03-23")),
+             linetype = 4,
+             color = "grey70") + # corresponds to March 23, 2020 - on this day, social contact limitations became effective
+  facet_wrap(~ age_category) +
+  theme_ft_rc() +
+  scale_color_manual(values = c("Positive" = "#852828", "Negative" = "#719861")) +
+  scale_y_continuous(breaks = c(-100, 0, 100)) +
+  guides(color = FALSE) +
+  labs(title = "Excess Deaths by Age Category over Time",
+       subtitle = "Vertical line corresponds to March 23, 2020, the day on which strict social distancing measures were implemented. \nColors encode cumulative excess deaths: green if negative, red if positive.",
+       x = NULL,
+       y = "Number of Excess Deaths",
+       caption = "Data: Destatis, Analysis: Florentin Krämer")
+
+ggsave(filename = "excess_deaths_time_age.pdf", path = "graphs/", device = cairo_pdf, 
+       width = 29.7, height = 21, units = "cm")
+
+ggsave(filename = "excess_deaths_time_age.png", path = "graphs/", type = "cairo-png", 
        width = 29.7, height = 21, units = "cm", dpi = 300)
