@@ -82,7 +82,7 @@ states_days_2020_clean <- states_days_2020 %>%
   rename(federal_state = `...1`) %>%
   select(-name) %>%
   group_by(federal_state) %>%
-  mutate(date = seq(lubridate::ymd("2020-01-01"), lubridate::ymd("2020-04-26"), by = "1 day"),
+  mutate(date = seq(lubridate::ymd("2020-01-01"), lubridate::ymd("2020-05-03"), by = "1 day"),
          week = lubridate::week(date)) %>%
   ungroup()
 
@@ -233,7 +233,7 @@ germany_ages_2020_clean <- germany_ages_2020 %>%
   mutate(age_category = forcats::as_factor(age_category)) %>%
   select(-name) %>%
   group_by(age_category) %>%
-  mutate(date = seq(lubridate::ymd("2020-01-01"), lubridate::ymd("2020-04-26"), by = "1 day"),
+  mutate(date = seq(lubridate::ymd("2020-01-01"), lubridate::ymd("2020-05-03"), by = "1 day"),
          week = lubridate::week(date)) %>%
   ungroup()
 
@@ -287,3 +287,4 @@ remove(germany_ages_2016, germany_ages_2016_clean, germany_ages_2017, germany_ag
 
 write_csv(germany_ages, "data/tidy/mortality_byAge.csv")
 write_rds(germany_ages, "data/tidy/mortality_byAge.rds")
+

@@ -77,7 +77,7 @@ states_days %>%
   coord_flip() +
   theme_ft_rc() +
   labs(title = "Cumulative Excess Deaths by Federal State",
-       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to April 26, 2020.",
+       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to May 3, 2020.",
        x = NULL,
        y = "Cumulative Number of Excess Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
@@ -102,7 +102,7 @@ states_days %>%
   coord_flip() +
   theme_ft_rc() +
   labs(title = "Ratio of 2020 Deaths to Median Value of Deaths by Federal State",
-       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to April 26, 2020.",
+       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to May 3, 2020.",
        x = NULL,
        y = "Ratio of Deaths to Median Value of Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
@@ -230,7 +230,7 @@ germany_ages %>%
   coord_flip() +
   theme_ft_rc() +
   labs(title = "Cumulative Excess Deaths by Age Category",
-       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to April 26, 2020.",
+       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to May 3, 2020.",
        x = NULL,
        y = "Cumulative Number of Excess Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
@@ -255,7 +255,7 @@ germany_ages %>%
   coord_flip() +
   theme_ft_rc() +
   labs(title = "Ratio of 2020 Deaths to Median Value of Deaths by Age Category",
-       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to April 26, 2020.",
+       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to May 3, 2020.",
        x = NULL,
        y = "Ratio of Deaths to Median Value of Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
