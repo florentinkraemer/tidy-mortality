@@ -82,7 +82,7 @@ states_days_2020_clean <- states_days_2020 %>%
   rename(federal_state = `...1`) %>%
   select(-name) %>%
   group_by(federal_state) %>%
-  mutate(date = seq(lubridate::ymd("2020-01-01"), lubridate::ymd("2020-05-03"), by = "1 day"),
+  mutate(date = seq(lubridate::ymd("2020-01-01"), lubridate::ymd("2020-05-17"), by = "1 day"),
          week = lubridate::week(date)) %>%
   ungroup()
 
@@ -120,8 +120,8 @@ states_days_summary <- states_days_allyears %>%
             p25.n.deaths = quantile(n.deaths, probs = 0.25),
             p75.n.deaths = quantile(n.deaths, probs = 0.75)) %>%
   ungroup() %>%
-  mutate(upper_bound.n.deaths = mean.n.deaths + sd.n.deaths / 2,
-         lower_bound.n.deaths = mean.n.deaths - sd.n.deaths / 2,
+  mutate(upper_bound.n.deaths = mean.n.deaths + sd.n.deaths,
+         lower_bound.n.deaths = mean.n.deaths - sd.n.deaths,
          upper_bound.mean.excess_mortality = upper_bound.n.deaths / mean.n.deaths,
          lower_bound.mean.excess_mortality = lower_bound.n.deaths / mean.n.deaths,
          upper_bound.median.excess_mortality = p75.n.deaths / median.n.deaths,
@@ -174,7 +174,7 @@ germany_ages_2017 <- readxl::read_excel("data/raw/sonderauswertung-sterbefaelle.
                                         col_names = FALSE)
 
 germany_ages_2017_clean <- germany_ages_2017 %>%
-  select(-`...367`, -`...368`) %>%
+  select(-`...367`) %>%
   pivot_longer(cols = 2:ncol(.), values_to = "n.deaths") %>%
   rename(age_category = `...1`) %>%
   mutate(age_category = forcats::as_factor(age_category)) %>%
@@ -192,7 +192,7 @@ germany_ages_2018 <- readxl::read_excel("data/raw/sonderauswertung-sterbefaelle.
                                         col_names = FALSE)
 
 germany_ages_2018_clean <- germany_ages_2018 %>%
-  select(-`...367`, -`...368`) %>%
+  select(-`...367`) %>%
   pivot_longer(cols = 2:ncol(.), values_to = "n.deaths") %>%
   rename(age_category = `...1`) %>%
   mutate(age_category = forcats::as_factor(age_category)) %>%
@@ -233,7 +233,7 @@ germany_ages_2020_clean <- germany_ages_2020 %>%
   mutate(age_category = forcats::as_factor(age_category)) %>%
   select(-name) %>%
   group_by(age_category) %>%
-  mutate(date = seq(lubridate::ymd("2020-01-01"), lubridate::ymd("2020-05-03"), by = "1 day"),
+  mutate(date = seq(lubridate::ymd("2020-01-01"), lubridate::ymd("2020-05-17"), by = "1 day"),
          week = lubridate::week(date)) %>%
   ungroup()
 
@@ -263,8 +263,8 @@ germany_ages_summary <- germany_ages_allyears %>%
             p25.proportion = quantile(proportion, probs = 0.25),
             p75.proportion = quantile(proportion, probs = 0.75)) %>%
   ungroup() %>%
-  mutate(upper_bound.mean.deaths = mean.n.deaths + sd.mean.n.deaths / 2,
-         lower_bound.mean.deaths = mean.n.deaths - sd.mean.n.deaths / 2,
+  mutate(upper_bound.mean.deaths = mean.n.deaths + sd.mean.n.deaths,
+         lower_bound.mean.deaths = mean.n.deaths - sd.mean.n.deaths,
          upper_bound.mean.excess_mortality = upper_bound.mean.deaths / mean.n.deaths,
          lower_bound.mean.excess_mortality = lower_bound.mean.deaths / mean.n.deaths,
          upper_bound.median.excess_mortality = p75.n.deaths / median.n.deaths,

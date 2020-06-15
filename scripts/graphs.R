@@ -24,7 +24,7 @@ states_days %>%
        y = "7-day rolling mean of ratio of 2020 deaths to mean 2016-2019 deaths",
        color = NULL,
        title = "Excess Mortality from All Causes by Federal State",
-       subtitle = "Relative to mean value of years 2016-2019. Shaded grey ribbon: one standard deviation. \nData for 2019 and 2020 preliminary. Details: https://tinyurl.com/yacmwu9d.",
+       subtitle = "Relative to mean value of years 2016-2019. Shaded grey ribbon: two standard deviations. \nData for 2019 and 2020 preliminary. Details: https://tinyurl.com/yacmwu9d.",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
 
 ggsave(filename = "excess_mortality_state_mean.pdf", path = "graphs/", device = cairo_pdf, 
@@ -64,7 +64,7 @@ ggsave(filename = "excess_mortality_state_median.png", path = "graphs/", type = 
 
 ## Cumulative Excess Deaths by Federal State, Median
 states_days %>%
-  filter(year == 2020) %>%
+  filter(date >= "2020-03-01") %>%
   mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
                                    n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
                                    n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 0)) %>%
@@ -77,7 +77,7 @@ states_days %>%
   coord_flip() +
   theme_ft_rc() +
   labs(title = "Cumulative Excess Deaths by Federal State",
-       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to May 3, 2020.",
+       subtitle = "Relative to median value of years 2016-2019.\nMarch 1, 2020 to May 17, 2020.",
        x = NULL,
        y = "Cumulative Number of Excess Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
@@ -90,7 +90,7 @@ ggsave(filename = "cum_excess_mortality_state_median.png", path = "graphs/", typ
 
 ## Average Ratio of Excess Deaths by Federal State, Median
 states_days %>%
-  filter(year == 2020) %>%
+  filter(date >= "2020-03-01") %>%
   mutate(ratio.deaths = n.deaths / median.n.deaths) %>%
   group_by(federal_state) %>%
   summarise(ratio.deaths = mean(ratio.deaths)) %>%
@@ -102,7 +102,7 @@ states_days %>%
   coord_flip() +
   theme_ft_rc() +
   labs(title = "Ratio of 2020 Deaths to Median Value of Deaths by Federal State",
-       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to May 3, 2020.",
+       subtitle = "Relative to median value of years 2016-2019.\nMarch 1, 2020 to May 17, 2020.",
        x = NULL,
        y = "Ratio of Deaths to Median Value of Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
@@ -116,7 +116,7 @@ ggsave(filename = "ratio_excess_mortality_state_median.png", path = "graphs/", t
 ## Excess Deaths over Time
 
 cum_excess_deaths.byState <- states_days %>%
-  filter(year == 2020) %>%
+  filter(date >= "2020-03-01") %>%
   mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
                                    n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
                                    n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 0)) %>%
@@ -125,7 +125,7 @@ cum_excess_deaths.byState <- states_days %>%
   mutate(flag_positive = forcats::as_factor(if_else(cum_excess_deaths > 0, "Positive", "Negative")))
 
 states_days %>%
-  filter(year == 2020) %>%
+  filter(date >= "2020-03-01") %>%
   left_join(cum_excess_deaths.byState) %>%
   mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
                                    n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
@@ -174,8 +174,8 @@ germany_ages %>%
   facet_wrap(~ age_category) +
   theme_ft_rc() +
   labs(title = "Excess Mortality from All Causes by Age Categories",
-       subtitle = "Relative to mean value of years 2016-2019. Shaded grey ribbon: one standard deviation. \nData for 2019 and 2020 preliminary. Details: https://tinyurl.com/yacmwu9d.",
-       x = "Date",
+       subtitle = "Relative to mean value of years 2016-2019. Shaded grey ribbon: two standard deviations. \nData for 2019 and 2020 preliminary. Details: https://tinyurl.com/yacmwu9d.",
+       x = "Day of Year",
        y = "Ratio of 2020 deaths to mean 2016-2019 deaths",
        color = NULL,
        caption = "Data: Destatis, Analysis: Florentin Krämer")
@@ -204,7 +204,7 @@ germany_ages %>%
   theme_ft_rc() +
   labs(title = "Excess Mortality from All Causes by Age Categories",
        subtitle = "Relative to median value of years 2016-2019. Shaded grey ribbon: interquartile range. \nData for 2019 and 2020 preliminary. Details: https://tinyurl.com/yacmwu9d.",
-       x = "Date",
+       x = "Day of Year",
        y = "Ratio of 2020 deaths to median 2016-2019 deaths",
        color = NULL,
        caption = "Data: Destatis, Analysis: Florentin Krämer")
@@ -217,7 +217,7 @@ ggsave(filename = "excess_mortality_age_median.png", path = "graphs/", type = "c
 
 ## Cumulative Excess Deaths by Age Group, Median
 germany_ages %>%
-  filter(year == 2020) %>%
+  filter(date >= "2020-03-01") %>%
   mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
                                    n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
                                    n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 0)) %>%
@@ -230,7 +230,7 @@ germany_ages %>%
   coord_flip() +
   theme_ft_rc() +
   labs(title = "Cumulative Excess Deaths by Age Category",
-       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to May 3, 2020.",
+       subtitle = "Relative to median value of years 2016-2019.\nMarch 1, 2020 to May 17, 2020.",
        x = NULL,
        y = "Cumulative Number of Excess Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
@@ -243,7 +243,7 @@ ggsave(filename = "cum_excess_mortality_age_median.png", path = "graphs/", type 
 
 ## Average Ratio of Excess Deaths by Age Group, Median
 germany_ages %>%
-  filter(year == 2020) %>%
+  filter(date >= "2020-03-01") %>%
   mutate(ratio.deaths = n.deaths / median.n.deaths) %>%
   group_by(age_category) %>%
   summarise(ratio.deaths = mean(ratio.deaths)) %>%
@@ -255,7 +255,7 @@ germany_ages %>%
   coord_flip() +
   theme_ft_rc() +
   labs(title = "Ratio of 2020 Deaths to Median Value of Deaths by Age Category",
-       subtitle = "Relative to median value of years 2016-2019.\nJanuary 1, 2020 to May 3, 2020.",
+       subtitle = "Relative to median value of years 2016-2019.\nMarch 1, 2020 to May 17, 2020.",
        x = NULL,
        y = "Ratio of Deaths to Median Value of Deaths",
        caption = "Data: Destatis, Analysis: Florentin Krämer")
@@ -269,7 +269,7 @@ ggsave(filename = "ratio_excess_mortality_age_median.png", path = "graphs/", typ
 ## Excess Deaths over Time
 
 cum_excess_deaths.byAge <- germany_ages %>%
-  filter(year == 2020) %>%
+  filter(date >= "2020-03-01") %>%
   mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
                                    n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
                                    n.deaths >= p25.n.deaths & n.deaths <= p75.n.deaths ~ 0)) %>%
@@ -278,7 +278,7 @@ cum_excess_deaths.byAge <- germany_ages %>%
   mutate(flag_positive = forcats::as_factor(if_else(cum_excess_deaths > 0, "Positive", "Negative")))
 
 germany_ages %>%
-  filter(year == 2020) %>%
+  filter(date >= "2020-03-01") %>%
   left_join(cum_excess_deaths.byAge) %>%
   mutate(excess_deaths = case_when(n.deaths < p25.n.deaths ~ n.deaths - p25.n.deaths,
                                    n.deaths > p75.n.deaths ~ n.deaths - p75.n.deaths,
